@@ -152,9 +152,17 @@ modded class SCR_BaseGameMode : BaseGameMode
 		
 		if (!playerGUID || playerGUID.Length() == 0)
 		{
-			Print("[Server Rules] Player GUID is empty, can only track by player name");
-			// This is triggered when running locally with no backend connection, so comment out the return to test
-			// return;
+            // If you run with no backend, there's no way to get a UUID, so we allow it but log a warning.
+            // This allows testing in the editor without backend, and will write agreement files with an empty GUID.
+            if (System.IsCLIParam("noBackend"))
+            {
+                Print("[Server Rules] Running with noBackend param, allowing empty GUID for testing");
+            }
+            else
+            {
+    			Print("[Server Rules] Player GUID is empty - Cannot present rules or track agreement.", LogLevel.WARNING);
+                return;
+            }
 		}
 		
 		// Build rules text on server
