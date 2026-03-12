@@ -42,8 +42,10 @@ class SRV_RulesTracker
 		string dateStr = GetISO8601Timestamp();
 
         // Now update this to use SRV_RulesAccepted struct and JsonApiStruct saving
-		SRV_RulesAccepted agreement = new SRV_RulesAccepted(true, dateStr, playerName, playerGUID);
-        if (agreement.SaveToFile(filePath))
+		SRV_RulesAccepted agreementData = new SRV_RulesAccepted(true, dateStr, playerName, playerGUID);
+        SCR_JsonSaveContext saveContext = new SCR_JsonSaveContext();
+        agreementData.Save(saveContext);
+        if (saveContext.SaveToFile(filePath))
         {
             Print("[Server Rules] SUCCESS: Agreement saved to " + filePath);
         }

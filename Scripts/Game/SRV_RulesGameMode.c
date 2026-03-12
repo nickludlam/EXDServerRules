@@ -161,7 +161,7 @@ modded class SCR_BaseGameMode : BaseGameMode
 		array<string> rules = config.GetRules();
 		foreach (string rule : rules)
 		{
-			rulesText += rule + "\n\n";
+			rulesText += rule + "\n";
 		}
 		
 		// Check if display_always is enabled

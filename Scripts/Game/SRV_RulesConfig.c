@@ -61,8 +61,9 @@ class SRV_RulesConfig : JsonApiStruct
         title = "Example Server Rules";
         rules.Clear();
         rules.Insert("Example Rule #1");
-        rules.Insert("Example Rule #2");
-        rules.Insert("Example Rule #3");
+        rules.Insert("<color rgba='255,100,100,255'>Example Rule #2 (colored)</color>");
+        rules.Insert("<b>Example Rule #3 (bold)</b>");
+        rules.Insert("This will look like a bulleted list:<br/> - Bullet point 1<br/> - Bullet point 2<br/> - Bullet point 3");
         rules.Insert("Edit rules in your server profile folder/server_rules/server_rules.json");
         rules.Insert("To disable showing the rules, set enabled to false in server_rules.json.");
         rules.Insert("To show rules always when player connects, set display_always to true.");
