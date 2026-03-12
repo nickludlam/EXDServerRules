@@ -33,8 +33,12 @@ class SRV_RulesDialogUI
 		if (s_bCachedUseLargeDialog)
 			presetName = PRESET_SERVER_RULES_LARGE;
 		
-		// Build full message with instructions
-		string fullMessage = "\n" + rulesText + "\nBy clicking Confirm, you agree to and acknowledge the server rules.\nBy clicking Cancel, you disagree with the rules and will return to the main menu.\n";
+        // We add extra newlines because we switched to Join() for formatting the rules text,
+        // which doesn't add a separator after the last rule, so we need to add some spacing
+        // before the agreement instructions.
+		string fullMessage = "\n" + rulesText + "\n\n";
+        fullMessage += "By clicking <b>Confirm</b>, you agree to and acknowledge the server rules.\n";
+        fullMessage += "By clicking <b>Cancel</b>, you disagree with the rules and will return to the main menu.\n";
 		
 		// Here we deviate from the original and create our own custom dialog called 'accept_rules'
 		s_Dialog = SCR_ConfigurableDialogUi.CreateFromPreset(

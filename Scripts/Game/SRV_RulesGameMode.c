@@ -60,6 +60,12 @@ modded class SCR_BaseGameMode : BaseGameMode
 	}
 
 	//------------------------------------------------------------------------------------------------
+	protected string SRV_FormatRulesText(array<string> rules, string separator = "\n\n")
+	{
+        return SCR_StringHelper.Join(separator, rules);
+	}
+
+	//------------------------------------------------------------------------------------------------
 	void SRV_RefreshRulesCacheForAllPlayers()
 	{
 		if (!System.IsConsoleApp())
@@ -73,12 +79,7 @@ modded class SCR_BaseGameMode : BaseGameMode
 		}
 
 		string title = config.GetTitle();
-		string rulesText = "";
-		array<string> rules = config.GetRules();
-		foreach (string rule : rules)
-		{
-			rulesText += rule + "\n\n";
-		}
+		string rulesText = SRV_FormatRulesText(config.GetRules());
 
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		if (!playerManager)
@@ -152,17 +153,13 @@ modded class SCR_BaseGameMode : BaseGameMode
 		if (!playerGUID || playerGUID.Length() == 0)
 		{
 			Print("[Server Rules] Player GUID is empty, can only track by player name");
-			//return;
+			// This is triggered when running locally with no backend connection, so comment out the return to test
+			// return;
 		}
 		
 		// Build rules text on server
 		string title = config.GetTitle();
-		string rulesText = "";
-		array<string> rules = config.GetRules();
-		foreach (string rule : rules)
-		{
-			rulesText += rule + "\n";
-		}
+		string rulesText = SRV_FormatRulesText(config.GetRules());
 		
 		// Check if display_always is enabled
 		bool displayAlways = config.IsDisplayAlways();
