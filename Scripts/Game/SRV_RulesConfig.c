@@ -72,6 +72,6 @@ class SRV_RulesConfig : JsonApiStruct
         rules.Insert("To use a larger dialog for rules, set use_large_dialog to true in config");
         rules.Insert("Mod by Bewilderbeest, build on the original 'Simple Server Rules' from Wil3son");
         enable_rules_reload_command = true;
-        use_large_dialog = false;
+        use_large_dialog = true;
     }
 }
